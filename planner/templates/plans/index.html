@@ -1,0 +1,19 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'plans/style.css' %}" />
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+       <!-- Instead of writting : 
+       	<li><a href="/planner/{{ question.id }}/">{{ question.question_text }}</a></li>
+       	write it as written below. So, if we have multiple templates with links to details page, and we want to change the url of details page
+       	then we don't have to change the links everywhere, just in the urls file of the app.
+        -->
+
+        <li><a href="{% url 'planner:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
